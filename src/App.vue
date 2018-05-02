@@ -3,15 +3,18 @@
     <h4 v-for="movie in movies" :key="movie.id">
       {{movie.title}}<br>
       <div class="row">
-        <div class="col-md-6"><img :src="movie.smallImgSrc" class="desktop"/></div>
+        <div class="col-md-6"><img @click="movie.description" :src="movie.smallImgSrc" class="desktop"/></div>
       </div>
     </h4>
+
+    <p v-if="show">{{movie.description}} </p>
   </div>
 </template>
 <script>
     export default {
         name: 'App',
         data () {
+            show: false
             return {
                 movies: [
                     {
