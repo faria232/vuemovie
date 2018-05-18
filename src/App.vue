@@ -1,20 +1,27 @@
 <template>
   <div>
-    <h4 v-for="movie in movies" :key="movie.id">
-      {{movie.title}}<br>
-      <div class="row">
-        <div class="col-md-6"><img @click="movie.description" :src="movie.smallImgSrc" class="desktop"/></div>
-      </div>
-    </h4>
+    <h1 class="head-title">Christopher Nolan Greatest Hits</h1>
+    <p class="text-center">click on your favourite movie to see details</p>
 
-    <p v-if="show">{{movie.description}} </p>
+    <h4 class="body-content" v-for="movie in movies" :key="movie.id">
+      <p class="movie-title">{{movie.title}}</p><br>
+      <div class="row">
+        <div class="col-sm-3"><img v-on:click="movie.seen =!movie.seen" :src="movie.smallImgSrc" class="desktop"/></div>
+          <div class="col-sm-9"><p class="description" v-if="movie.seen">{{movie.description}}
+          <br><br>Stars: {{movie.stars}}
+          </p>
+
+          </div>
+      </div>
+
+    </h4>
   </div>
 </template>
 <script>
     export default {
         name: 'App',
         data () {
-            show: false
+
             return {
                 movies: [
                     {
@@ -22,13 +29,15 @@
                         title: 'Dunkirk',
                         subtitle: 'Dunkirk',
                         description: `Miraculous evacuation of Allied soldiers from Belgium, Britain, Canada, and France, who were cut off and surrounded by the German army from the beaches and harbor of Dunkirk, France, during the Battle of France in World War II.`,
-                        largeImgSrc: `url('https://image.tmdb.org/t/p/w780/fudEG1VUWuOqleXv6NwCExK0VLy.jpg')`,
+                        largeImgSrc: 'https://image.tmdb.org/t/p/w780/fudEG1VUWuOqleXv6NwCExK0VLy.jpg',
                         smallImgSrc: 'https://image.tmdb.org/t/p/w185/fudEG1VUWuOqleXv6NwCExK0VLy.jpg',
                         releaseDate: 'July 21 2017',
                         duration: '1hr 46min',
                         genre: 'Action, Drama, History',
                         trailerPath: 'https://www.youtube.com/embed/F-eMt3SrfFU',
-                        favorite: false
+                        favorite: false,
+                        stars: 'Fionn Whitehead, Barry Keoghan, Mark Rylance, Tom Hardy',
+                        seen: false
                     },
                     {
                         id: 'interstellar',
@@ -41,7 +50,9 @@
                         duration: '2hr 49min',
                         genre: 'Adventure, Drama',
                         trailerPath: 'https://www.youtube.com/embed/zSWdZVtXT7E',
-                        favorite: false
+                        favorite: false,
+                        stars: 'Matthew McConaughey, Anne Hathaway, Jessica Chastain',
+                        seen: false
                     },
                     {
                         id: 'the-dark-knight-rises',
@@ -54,7 +65,9 @@
                         duration: '2hr 44min',
                         genre: 'Action, Thriller',
                         trailerPath: 'https://www.youtube.com/embed/g8evyE9TuYk',
-                        favorite: false
+                        favorite: false,
+                        stars: ' Christian Bale, Tom Hardy, Anne Hathaway',
+                        seen: false
                     },
                     {
                         id: 'inception',
@@ -67,7 +80,9 @@
                         duration: '2hr 28min',
                         genre: 'Action, Adventure, Sci-Fi',
                         trailerPath: 'https://www.youtube.com/embed/8hP9D6kZseM',
-                        favorite: false
+                        favorite: false,
+                        stars: ' Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page',
+                        seen: false
                     },
                     {
                         id: 'the-prestige',
@@ -80,7 +95,9 @@
                         duration: '2hr 10min',
                         genre: 'Drama, Mystery, Sci-Fi',
                         trailerPath: 'https://www.youtube.com/embed/ijXruSzfGEc',
-                        favorite: false
+                        favorite: false,
+                        stars:'Christian Bale, Hugh Jackman, Scarlett Johansson',
+                        seen: false
                     }
                 ]
             }
@@ -90,5 +107,5 @@
 </script>
 
 <style>
-
+  @import './assets/custom.css';
 </style>
