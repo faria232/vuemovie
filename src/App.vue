@@ -1,14 +1,31 @@
-
 <template>
   <div>
     <h1 class="head-title">Christopher Nolan Greatest Hits</h1>
     <p class="text-center">click on your favourite movie to see details</p>
 
     <div class="search">
-      <input type="text" v-model="searchText" placeholder="Search"/>
+      <!--Step 1-->
+      <!-- Rename search to searchText-->
+      <input type="text" v-model="searchText" placeholder=" Search"/>
     </div>
+    <div v-if="movieitems">
+      <ul class="searchedmovie">
+        <li>
+          <h4 class="body-content" v-for="movie in movieitems" :key="movie.id">
+            <p class="movie-title">{{movie.title}}</p><br>
+            <div class="row">
+              <div class="col-sm-3"><img v-on:click="movie.seen =!movie.seen" :src="movie.smallImgSrc" class="desktop"/></div>
+              <div class="col-sm-9"><p class="description" v-if="movie.seen">{{movie.description}}
+                <br><br>Stars: {{movie.stars}}
+              </p>
+              </div>
+            </div>
+          </h4>
+        </li>
+      </ul>
 
-    <h4 class="body-content" v-for="movie in movieitems" :key="movie.id">
+    </div>
+    <h4 class="body-content" v-for="movie in movies" :key="movie.id">
       <p class="movie-title">{{movie.title}}</p><br>
       <div class="row">
         <div class="col-sm-3"><img v-on:click="movie.seen =!movie.seen" :src="movie.smallImgSrc" class="desktop"/></div>
@@ -27,6 +44,8 @@
         name: 'App',
         data () {
             return {
+                // Step 2
+                // Add an empty variable called searchText
                 searchText: '',
                 movies: [
                     {
@@ -107,23 +126,25 @@
                 ]
             }
         },
+
         computed: {
             movieitems: function () {
-                       return this.movies.filter(movie => {
-                    return movie.id.match(this.searchText) >= 0;
+
+                var self = this;
+                if (this.searchText == ''){
+                    return '';
+                }
+                let lowerSearchText = this.searchText.toLowerCase()
+                return this.movies.filter(movie => {
+                    return movie.title.toLowerCase().indexOf(lowerSearchText) >= 0;
                 });
             }
         }
     }
+
 
 </script>
 
 <style>
   @import './assets/custom.css';
 </style>
-
-
-
-
-
-

@@ -12,6 +12,11 @@
 
 .search{
     color: #000;
+    text-align: right;
+}
+
+.searchedmovie{
+   list-style-type: none;
 }
 .body-content{
     margin-bottom: 53px;
