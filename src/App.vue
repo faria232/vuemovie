@@ -1,17 +1,22 @@
+
 <template>
   <div>
     <h1 class="head-title">Christopher Nolan Greatest Hits</h1>
     <p class="text-center">click on your favourite movie to see details</p>
 
-    <h4 class="body-content" v-for="movie in movies" :key="movie.id">
+    <div class="search">
+      <input type="text" v-model="searchText" placeholder="Search"/>
+    </div>
+
+    <h4 class="body-content" v-for="movie in movieitems" :key="movie.id">
       <p class="movie-title">{{movie.title}}</p><br>
       <div class="row">
         <div class="col-sm-3"><img v-on:click="movie.seen =!movie.seen" :src="movie.smallImgSrc" class="desktop"/></div>
-          <div class="col-sm-9"><p class="description" v-if="movie.seen">{{movie.description}}
+        <div class="col-sm-9"><p class="description" v-if="movie.seen">{{movie.description}}
           <br><br>Stars: {{movie.stars}}
-          </p>
+        </p>
 
-          </div>
+        </div>
       </div>
 
     </h4>
@@ -21,8 +26,8 @@
     export default {
         name: 'App',
         data () {
-
             return {
+                searchText: '',
                 movies: [
                     {
                         id: 'dunkirk',
@@ -101,6 +106,13 @@
                     }
                 ]
             }
+        },
+        computed: {
+            movieitems: function () {
+                       return this.movies.filter(movie => {
+                    return movie.id.match(this.searchText) >= 0;
+                });
+            }
         }
     }
 
@@ -109,3 +121,9 @@
 <style>
   @import './assets/custom.css';
 </style>
+
+
+
+
+
+
